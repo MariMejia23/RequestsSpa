@@ -14,6 +14,7 @@ import { AddPersonComponent } from '../add-person/add-person.component';
 export class UpdatePersonComponent implements OnInit {
   person: Person | undefined;
   showProgressBar: boolean | undefined;
+  imageSrc: any;
   personForm = this.fb.group({
     id: [this.data.id, Validators.required],
     name: [this.data.name, Validators.required],
@@ -21,8 +22,7 @@ export class UpdatePersonComponent implements OnInit {
     birthDay: [this.data.birthDay, Validators.required],
     passport: [this.data.passport, Validators.required],
     address: [this.data.address, Validators.required],
-    gender: [this.data.gender, Validators.required],
-    photo: [this.data.photo, Validators.required],
+    gender: [this.data.gender, Validators.required]
   });
   get id() {
     return this.personForm.get('id');
@@ -45,13 +45,11 @@ export class UpdatePersonComponent implements OnInit {
   get gender() {
     return this.personForm.get('gender');
   }
-  get photo() {
-    return this.personForm.get('photo');
-  }
   constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<AddPersonComponent>,
     private personService: PersonService, private toastr: ToastrService, @Inject(MAT_DIALOG_DATA) public data: Person) { }
 
   ngOnInit(): void {
+    this.imageSrc = this.data.photo;
   }
   updatePerson() {
     this.showProgressBar = true;
@@ -63,7 +61,7 @@ export class UpdatePersonComponent implements OnInit {
       passport: this.passport?.value,
       address: this.address?.value,
       gender: this.gender?.value,
-      photo: this.photo?.value
+      photo: this.imageSrc
     }
     this.personService.update(this.person).subscribe(response => {
       if (response.status == 204) {
@@ -87,5 +85,17 @@ export class UpdatePersonComponent implements OnInit {
         positionClass: 'toast-top-right'
       });
     });
+  }
+  onFileChange(event: any) {
+    const reader = new FileReader();
+
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        this.imageSrc = reader.result as string;
+      };
+    }
   }
 }

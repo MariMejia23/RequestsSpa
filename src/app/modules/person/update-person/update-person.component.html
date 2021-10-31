@@ -58,11 +58,14 @@
                             </mat-select>
                         </mat-form-field>                        
                     </mat-grid-tile>
-                    <mat-grid-tile [colspan]="4" [rowspan]="2">
-                        <mat-form-field appearance="outline">
-                            <mat-label>Foto</mat-label>
-                            <input matInput placeholder="Foto" formControlName="photo">
-                        </mat-form-field>
+                    <mat-grid-tile [colspan]="2" [rowspan]="2">
+                        <label mat-raised-button for="file-upload" class="custom-file-upload">
+                                <mat-icon>file_upload</mat-icon> Subir Foto
+                            </label>
+                        <input id="file-upload" type="file" (change)="onFileChange($event)" />
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="2" [rowspan]="2">
+                        <img [src]="imageSrc" width="80px" height="80px">
                     </mat-grid-tile>
                 </mat-grid-list>
             </mat-card-content>

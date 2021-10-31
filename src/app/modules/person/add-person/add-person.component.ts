@@ -13,6 +13,7 @@ import { PersonService } from 'src/app/core/services/person.service';
 })
 export class AddPersonComponent implements OnInit {
   person: Person | undefined;
+  imageSrc: any;
   showProgressBar: boolean | undefined;
   personForm = this.fb.group({
     name: ['', Validators.required],
@@ -20,8 +21,8 @@ export class AddPersonComponent implements OnInit {
     birthDay: ['', Validators.required],
     passport: ['', Validators.required],
     address: ['', Validators.required],
-    gender: ['', Validators.required],
-    photo: ['', Validators.required],
+    gender: ['', Validators.required]
+    
   });
 
   get name() {
@@ -42,9 +43,6 @@ export class AddPersonComponent implements OnInit {
   get gender() {
     return this.personForm.get('gender');
   }
-  get photo() {
-    return this.personForm.get('photo');
-  }
   constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<AddPersonComponent>,
     private personService: PersonService, private toastr: ToastrService) { }
 
@@ -59,7 +57,7 @@ export class AddPersonComponent implements OnInit {
       passport: this.passport?.value,
       address: this.address?.value,
       gender: this.gender?.value,
-      photo: this.photo?.value
+      photo: this.imageSrc
     }
     this.personService.create(this.person).subscribe(response => {
       if (response.status == 204) {
@@ -84,5 +82,16 @@ export class AddPersonComponent implements OnInit {
       });
     });
   }
+  onFileChange(event: any) {
+    const reader = new FileReader();
 
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        this.imageSrc = reader.result as string;
+      };
+    }
+  }
 }
