@@ -1,0 +1,27 @@
+<div class="login-wrapper bg-login" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card class="mat-elevation-z4">
+      <mat-card-header>
+        <mat-card-title>
+          <div>
+            <img src="../../../../assets/login_icon.png" width="100" height="100" />
+          </div>
+          <div>
+            <h2>Login</h2>
+          </div>
+        </mat-card-title>
+      </mat-card-header>
+      <form [formGroup]="loginForm"  class="form-login" (submit)="onSubmit()">
+        <mat-card-content>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Usuario</mat-label>
+            <input formControlName="userName" matInput  placeholder="Usuario" (keydown.enter)="loginForm.valid && onSubmit()">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Password</mat-label>
+            <input formControlName="password" matInput type="password" placeholder="Password" (keydown.enter)="loginForm.valid && onSubmit()">
+          </mat-form-field>
+        </mat-card-content>
+        <button mat-raised-button color="primary" class="full-width" type="submit">Entrar</button>  
+      </form>
+    </mat-card>
+  </div>

@@ -1,1 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.justify-content-center{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+  }
+  
+  .text-align-center{
+      text-align: center;
+  }
+  
+  .margin-30 {
+      margin: 30px;
+  }
+
+  .fill-remaining-space {
+    /* This fills the remaining space, by using flexbox.
+       Every toolbar row uses a flexbox row layout. */
+    flex: 1 1 auto;
+  }
+.text-align-end {
+    text-align: end;
+}
+.margin-left-10{
+    margin-left: 10px;
+  }
+
+  .margin-right-10{
+    margin-right: 10px !important;
+  }
+
+  .full-width{
+    width: 100%;
+  }
+
+  .align-center{
+    text-align: center;
+  }

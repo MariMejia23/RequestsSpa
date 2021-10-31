@@ -1,0 +1,42 @@
+<mat-progress-bar mode="indeterminate" *ngIf="showProgressBar"></mat-progress-bar>     
+<div mat-dialog-title>
+    Actualizar Solicitud
+</div>
+<div mat-dialog-content>    
+    <form [formGroup]="requestForm">
+        <mat-card class="margin-30 mat-elevation-z4">
+            <mat-card-content>
+                <mat-grid-list [cols]="4" rowHeight="40px">
+                    <mat-grid-tile [colspan]="4" [rowspan]="2">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Persona</mat-label>
+                            <mat-select formControlName="personId">
+                                <mat-option *ngFor="let person of persons" value="person.id">
+                                    {{person.name + ' ' + person.lastName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>   
+                    </mat-grid-tile>   
+                    <mat-grid-tile [colspan]="4" [rowspan]="2">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Estado</mat-label>
+                            <mat-select formControlName="statusId">
+                                <mat-option *ngFor="let statu of status" value="statu.id">
+                                    {{statu.description}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>   
+                    </mat-grid-tile>                   
+                        
+                </mat-grid-list>
+            </mat-card-content>
+        </mat-card>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="updateRequest()" type="submit" [disabled]="requestForm.invalid || showProgressBar ">
+        <mat-icon>save</mat-icon>
+        Actualizar
+    </button>
+    <button mat-raised-button mat-dialog-close>Cancelar</button>
+</div>
