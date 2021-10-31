@@ -41,9 +41,12 @@ export class AddRequestComponent implements OnInit {
     this.getStatus();
   }
   getPersons() {
+    this.showProgressBar = true;
     this.personService.getAll().subscribe(data => {
       this.persons = data.body as Person[];
+      this.showProgressBar = false;
     }, err => {
+      this.showProgressBar = false;
       console.log(err);
       this.toastr.error('Ha ocurrido un error cargando los datos de las personas, favor de refrescar la pagina', 'Error', {
         timeOut: 3000,

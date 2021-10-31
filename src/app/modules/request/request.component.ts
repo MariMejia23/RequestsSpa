@@ -54,6 +54,7 @@ export class RequestComponent implements OnInit {
     });
   }
   getRequest() {
+    this.showBarProgress = true;
     this.requestService.getAll().subscribe(data => {
       this.requests = data.body as Request[];
       this.dataSource.data = this.requests;
