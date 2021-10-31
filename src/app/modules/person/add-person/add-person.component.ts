@@ -62,7 +62,7 @@ export class AddPersonComponent implements OnInit {
       photo: this.photo?.value
     }
     this.personService.create(this.person).subscribe(response => {
-      if (response.status) {
+      if (response.status == 204) {
         this.toastr.success('', 'Persona creada', {
           timeOut: 3000,
           positionClass: 'toast-top-right'

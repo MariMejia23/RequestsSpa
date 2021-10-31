@@ -42,7 +42,7 @@ export class AddRequestComponent implements OnInit {
   }
   getPersons() {
     this.personService.getAll().subscribe(data => {
-      this.persons = data as Person[];
+      this.persons = data.body as Person[];
     }, err => {
       console.log(err);
       this.toastr.error('Ha ocurrido un error cargando los datos de las personas, favor de refrescar la pagina', 'Error', {
@@ -53,7 +53,7 @@ export class AddRequestComponent implements OnInit {
   }
   getStatus() {
     this.statusService.getAll().subscribe(data => {
-      this.status = data as Status[];
+      this.status = data.body as Status[];
     }, err => {
       console.log(err);
       this.toastr.error('Ha ocurrido un error cargando los estatus, favor de refrescar la pagina', 'Error', {
@@ -68,8 +68,10 @@ export class AddRequestComponent implements OnInit {
       statusId: this.statusId?.value,
       personId: this.personId?.value
     }
+    console.log(this.request);
     this.requestService.create(this.request).subscribe(response => {
-      if (response.status) {
+      console.log(response);
+      if (response.status == 204) {
         this.toastr.success('', 'Solicitud creada', {
           timeOut: 3000,
           positionClass: 'toast-top-right'

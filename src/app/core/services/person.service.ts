@@ -12,17 +12,17 @@ apiURL = environment.apiURL + 'person';
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<any> {
-    return this.http.get(this.apiURL);
+    return this.http.get(this.apiURL,{observe: 'response'});
   }
 
   create(person: Person | undefined): Observable<any> {
-    return this.http.post(this.apiURL, person);
+    return this.http.post(this.apiURL, person, {observe: 'response'});
   }
   update(person: Person | undefined): Observable<any> {
-    return this.http.put(this.apiURL, person);
+    return this.http.put(this.apiURL, person, {observe: 'response'});
   }
 
   delete(id: number): Observable<any> {
-    return this.http.delete(this.apiURL + id.toString());
+    return this.http.delete(this.apiURL + '/' + id.toString(), {observe: 'response'});
   }
 }

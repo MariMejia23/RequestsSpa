@@ -49,10 +49,10 @@
                         <mat-form-field appearance="fill">
                             <mat-label>Genero</mat-label>
                             <mat-select formControlName="gender">
-                                <mat-option value="Masculino">
+                                <mat-option [value]="'Masculino'">
                                     Masculino
                                 </mat-option>
-                                <mat-option value="Femenino">
+                                <mat-option [value]="'Femenino'">
                                     Femenino
                                 </mat-option>
                             </mat-select>

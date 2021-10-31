@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -15,7 +16,17 @@ export class NavComponent {
       map(result => result.matches),
       shareReplay()
     );
+  showMenu: boolean | undefined = true;
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router) {
+    this.router.events.subscribe((val) => {
+      if( this.router.url == '/login') {
+        this.showMenu = false;
+      }
+      else {
+        this.showMenu = true;
+      }
+  });
+  }
 
 }

@@ -40,11 +40,12 @@ export class UpdateRequestComponent implements OnInit {
   ngOnInit(): void {
     this.getPersons();
     this.getStatus();
+    console.log(this.requestForm);
   }
   getPersons() {
     this.showProgressBar = true;
     this.personService.getAll().subscribe(data => {
-      this.persons = data as Person[];
+      this.persons = data.body as Person[];
       this.showProgressBar = false;
     }, err => {
       this.showProgressBar = false;
@@ -58,7 +59,7 @@ export class UpdateRequestComponent implements OnInit {
   getStatus() { 
     this.showProgressBar = true;
     this.statusService.getAll().subscribe(data => {
-      this.status = data as Status[];
+      this.status = data.body as Status[];
       this.showProgressBar = false;
     }, err => {
       this.showProgressBar = false;
@@ -72,11 +73,13 @@ export class UpdateRequestComponent implements OnInit {
   updateRequest() { 
     this.showProgressBar = true;
     this.request = {
+      id: this.data.id,
       statusId: this.statusId?.value,
-      personId: this.personId?.value
+      personId: this.personId?.value,
+      createdAt: this.data.createdAt
     }
     this.requestService.update(this.request).subscribe(response => {
-      if (response.status) {
+      if (response.status == 204) {
         this.toastr.success('', 'Solicitud actualizada', {
           timeOut: 3000,
           positionClass: 'toast-top-right'

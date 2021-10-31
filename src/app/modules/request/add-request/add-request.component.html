@@ -11,7 +11,7 @@
                         <mat-form-field appearance="fill">
                             <mat-label>Persona</mat-label>
                             <mat-select formControlName="personId">
-                                <mat-option *ngFor="let person of persons" value="person.id">
+                                <mat-option *ngFor="let person of persons" [value]="person.id">
                                     {{person.name + ' ' + person.lastName}}
                                 </mat-option>
                             </mat-select>
@@ -21,7 +21,7 @@
                         <mat-form-field appearance="fill">
                             <mat-label>Estado</mat-label>
                             <mat-select formControlName="statusId">
-                                <mat-option *ngFor="let statu of status" value="statu.id">
+                                <mat-option *ngFor="let statu of status" [value]="statu.id">
                                     {{statu.description}}
                                 </mat-option>
                             </mat-select>

@@ -36,7 +36,7 @@ export class PersonComponent implements OnInit {
 
   getPersons() {
     this.personService.getAll().subscribe(data => {
-      this.dataSource.data = data as Person[];
+      this.dataSource.data = data.body as Person[];
       this.showBarProgress = false;
     }, err => {
       console.log(err);
@@ -58,7 +58,7 @@ export class PersonComponent implements OnInit {
       if (result) {
         this.showBarProgress = true;
         this.personService.delete(personId).subscribe(response => {
-          if (response) {
+          if (response.status == 204) {
             this.toastr.success('', 'Persona eliminado', {
               timeOut: 3000,
               positionClass: 'toast-top-right'

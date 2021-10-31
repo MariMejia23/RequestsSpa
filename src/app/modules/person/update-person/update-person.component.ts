@@ -66,7 +66,7 @@ export class UpdatePersonComponent implements OnInit {
       photo: this.photo?.value
     }
     this.personService.update(this.person).subscribe(response => {
-      if (response) {
+      if (response.status == 204) {
         this.toastr.success('', 'Persona actualizada', {
           timeOut: 3000,
           positionClass: 'toast-top-right'

@@ -7,4 +7,5 @@ export class Request {
     status?: Status | undefined;
     personId: number | undefined;
     person?: Person | undefined;
+    createdAt?: string | undefined;
 }

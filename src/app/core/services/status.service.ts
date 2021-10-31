@@ -13,17 +13,17 @@ export class StatusService {
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<any> {
-    return this.http.get(this.apiURL);
+    return this.http.get(this.apiURL, {observe: 'response'});
   }
 
   create(status: Status | undefined): Observable<any> {
-    return this.http.post(this.apiURL, status);
+    return this.http.post(this.apiURL, status, {observe: 'response'});
   }
   update(status: Status | undefined): Observable<any> {
-    return this.http.put(this.apiURL, status);
+    return this.http.put(this.apiURL, status, {observe: 'response'});
   }
 
   delete(id: number): Observable<any> {
-    return this.http.delete(this.apiURL + id.toString());
+    return this.http.delete(this.apiURL + '/' + id.toString(), {observe: 'response'});
   }
 }
